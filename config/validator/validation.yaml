@@ -1,0 +1,80 @@
+App\Entity\Location:
+    properties:
+        name:
+            - NotBlank:
+                  message: "Nazwa miasta nie może być pusta."
+                  groups: ["create", "edit"]
+        country:
+            - NotBlank:
+                  message: "Kraj jest wymagany."
+                  groups: ["create"]
+        latitude:
+            - NotBlank:
+                  message: "Szerokość geograficzna jest wymagana."
+                  groups: ["create", "edit"]
+            - Range:
+                  min: -90
+                  max: 90
+                  notInRangeMessage: "Szerokość musi być między -90 a 90."
+                  groups: ["create", "edit"]
+        longitude:
+            - NotBlank:
+                  message: "Długość geograficzna jest wymagana."
+                  groups: ["create", "edit"]
+            - Range:
+                  min: -180
+                  max: 180
+                  notInRangeMessage: "Długość musi być między -180 a 180."
+                  groups: ["create", "edit"]
+
+App\Entity\Forecast:
+    properties:
+        date:
+            - NotBlank:
+                  message: "Data pomiaru nie może być pusta."
+                  groups: ["create", "edit"]
+        temperatureC:
+            - NotBlank:
+                  message: "Temperatura jest wymagana."
+                  groups: ["create", "edit"]
+            - Range:
+                  min: -50
+                  max: 60
+                  notInRangeMessage: "Temperatura musi być realistyczna (między -50 a 60)."
+                  groups: ["create", "edit"]
+        humidity:
+            - NotBlank:
+                  message: "Wilgotność jest wymagana."
+                  groups: ["create", "edit"]
+            - Range:
+                  min: 0
+                  max: 100
+                  notInRangeMessage: "Wilgotność musi być w zakresie 0-100%."
+                  groups: ["create", "edit"]
+        uvIndex:
+            - NotBlank:
+                  message: "Indeks UV jest wymagany."
+                  groups: ["create", "edit"]
+            - Range:
+                  min: 0
+                  max: 11
+                  notInRangeMessage: "Indeks UV musi być w zakresie 0-11."
+                  groups: ["create", "edit"]
+        windSpeed:
+            - NotBlank:
+                  message: "Prędkość wiatru jest wymagana."
+                  groups: ["create", "edit"]
+            - Range:
+                  min: 0
+                  max: 300
+                  notInRangeMessage: "Prędkość wiatru musi być w zakresie 0-300 km/h."
+                  groups: ["create", "edit"]
+        windDirection:
+            - NotBlank:
+                  message: "Kierunek wiatru jest wymagany."
+                  groups: ["create", "edit"]
+        location:
+            - NotBlank:
+                  message: "Musisz wybrać lokalizację dla prognozy."
+                  groups: ["create", "edit"]
+

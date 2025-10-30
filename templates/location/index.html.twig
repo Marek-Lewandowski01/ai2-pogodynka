@@ -39,5 +39,8 @@
         </table>
     </div>
 
-    <a href="{{ path('app_location_new') }}" class="btn btn-success">Create new</a>
+    {%  if is_granted('ROLE_LOCATION_NEW') %}
+        <a href="{{ path('app_location_new') }}" class="btn btn-success">Create new</a>
+    {% endif %}
+
 {% endblock %}

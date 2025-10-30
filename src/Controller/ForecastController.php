@@ -10,10 +10,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/forecast')]
 final class ForecastController extends AbstractController
 {
+    #[IsGranted('ROLE_FORECAST_INDEX')]
     #[Route(name: 'app_forecast_index', methods: ['GET'])]
     public function index(ForecastRepository $forecastRepository): Response
     {
@@ -22,6 +24,7 @@ final class ForecastController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_FORECAST_NEW')]
     #[Route('/new', name: 'app_forecast_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -42,6 +45,7 @@ final class ForecastController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_FORECAST_SHOW')]
     #[Route('/{id}', name: 'app_forecast_show', methods: ['GET'])]
     public function show(Forecast $forecast): Response
     {
@@ -50,6 +54,7 @@ final class ForecastController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_FORECAST_EDIT')]
     #[Route('/{id}/edit', name: 'app_forecast_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Forecast $forecast, EntityManagerInterface $entityManager): Response
     {
@@ -68,6 +73,7 @@ final class ForecastController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_FORECAST_DELETE')]
     #[Route('/{id}', name: 'app_forecast_delete', methods: ['POST'])]
     public function delete(Request $request, Forecast $forecast, EntityManagerInterface $entityManager): Response
     {

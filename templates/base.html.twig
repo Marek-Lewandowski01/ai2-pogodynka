@@ -41,6 +41,17 @@
                         <a class="nav-link" href="{{ path('app_forecast_index') }}">Prognozy</a>
                     </li>
                 </ul>
+                <ul class="navbar-nav">
+                    {% if is_granted('ROLE_USER') %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('app_logout') }}">Wyloguj</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('app_login') }}">Zaloguj</a>
+                        </li>
+                    {% endif %}
+                </ul>
             </div>
         </div>
     </nav>

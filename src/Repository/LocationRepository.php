@@ -20,7 +20,7 @@ class LocationRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('l')
             ->andWhere('l.country = :country')
-            ->andWhere('l.city = :city')
+            ->andWhere('l.name = :city')
             ->setParameter('country', $countryCode)
             ->setParameter('city', $city)
             ->getQuery()

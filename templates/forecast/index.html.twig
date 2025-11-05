@@ -10,6 +10,7 @@
             <thead>
                 <tr>
                     <th class="d-none d-md-table-cell">Id</th>
+                    <th>Location</th>
                     <th>Date</th>
                     <th>TemperatureC</th>
                     <th>Humidity</th>
@@ -23,6 +24,7 @@
             {% for forecast in forecasts %}
                 <tr>
                     <td class="d-none d-md-table-cell">{{ forecast.id }}</td>
+                    <td>{{ forecast.location.name }}</td>
                     <td>{{ forecast.date ? forecast.date|date('Y-m-d') : '' }}</td>
                     <td>{{ forecast.temperatureC }}</td>
                     <td>{{ forecast.humidity }}</td>

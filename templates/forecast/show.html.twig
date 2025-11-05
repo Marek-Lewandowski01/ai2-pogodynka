@@ -12,6 +12,10 @@
                 <td>{{ forecast.id }}</td>
             </tr>
             <tr>
+                <th>Location</th>
+                <td>{{ forecast.location.name }}</td>
+            </tr>
+            <tr>
                 <th>Date</th>
                 <td>{{ forecast.date ? forecast.date|date('Y-m-d') : '' }}</td>
             </tr>

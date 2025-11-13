@@ -124,4 +124,10 @@ class Forecast
 
         return $this;
     }
+
+    public function getFahrenheit(): float
+    {
+        return $this->getTemperatureC() * 9/5 + 32;
+    }
+
 }

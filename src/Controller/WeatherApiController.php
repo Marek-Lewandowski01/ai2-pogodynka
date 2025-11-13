@@ -41,13 +41,12 @@ final class WeatherApiController extends AbstractController
         }
 
         // Mapowanie encji na prostą tablicę (static jako optymalizacja pamięci, bo kontekst obiektu nie jest potrzebny)
-        $forecastData = array_map(
-            static fn($f) => [
-                'date' => $f->getDate()->format('Y-m-d'),
-                'temperatureC' => $f->getTemperatureC(),
-            ],
-            $forecasts
-        );
+        $forecastData = array_map(fn($f) => [
+            'date' => $f->getDate()->format('Y-m-d'),
+            'temperatureC' => $f->getTemperatureC(),
+            'fahrenheit' => $f->getFahrenheit(),
+        ], $forecasts);
+
 
         if ($twig) {
             if ($format === 'csv') {
@@ -66,15 +65,16 @@ final class WeatherApiController extends AbstractController
         }
 
         if ($format === 'csv') {
-            $csv = "city,country,date,celsius\n";
+            $csv = "city,country,date,celsius,fahrenheit\n";
 
             foreach ($forecastData as $row) {
                 $csv .= sprintf(
-                    "%s,%s,%s,%s\n",
+                    "%s,%s,%s,%s,%s\n",
                     $city,
                     $country,
                     $row['date'],
-                    $row['temperatureC']
+                    $row['temperatureC'],
+                    $row['fahrenheit']
                 );
             }
 

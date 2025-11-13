@@ -1,5 +1,5 @@
-city,country,date,celsius
+city,country,date,celsius,fahrenheit
 {%- for f in forecasts %}
-{{- city -}},{{- country -}},{{- f.date -}},{{- f.temperatureC -}}
+{{- city -}},{{- country -}},{{- f.date -}},{{- f.temperatureC -}},{{- f.fahrenheit -}}
 {% endfor -%}
 

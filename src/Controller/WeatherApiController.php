@@ -17,6 +17,7 @@ final class WeatherApiController extends AbstractController
         #[MapQueryParameter] string $city,
         WeatherUtil $weatherUtil,
         #[MapQueryParameter] string $format = 'json',
+        #[MapQueryParameter] bool $twig = false,
     ): Response
     {
         // Walidacja formatu
@@ -47,6 +48,22 @@ final class WeatherApiController extends AbstractController
             ],
             $forecasts
         );
+
+        if ($twig) {
+            if ($format === 'csv') {
+                return $this->render('weather_api/index.csv.twig', [
+                    'city' => $city,
+                    'country' => $country,
+                    'forecasts' => $forecastData,
+                ]);
+            }
+
+            return $this->render('weather_api/index.json.twig', [
+                'city' => $city,
+                'country' => $country,
+                'forecasts' => $forecastData,
+            ]);
+        }
 
         if ($format === 'csv') {
             $csv = "city,country,date,celsius\n";

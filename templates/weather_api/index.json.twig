@@ -1,0 +1,13 @@
+{
+    "country": "{{ country }}",
+    "city": "{{ city }}",
+    "forecasts": [
+        {% for f in forecasts %}
+        {
+            "date": "{{ f.date }}",
+            "temperatureC": "{{ f.temperatureC }}"
+        }{% if not loop.last %},{% endif %}
+        {% endfor %}
+    ]
+}
+

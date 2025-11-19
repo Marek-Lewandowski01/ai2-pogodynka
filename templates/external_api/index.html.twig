@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}External Weather API{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1 class="mb-4">Weather Forecast</h1>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <h2 class="h5 mb-0">Enter Location Coordinates</h2>
+        </div>
+        <div class="card-body">
+            {{ form_start(form, {'attr': {'data-turbo': 'false'}}) }}
+                <div class="row">
+                    <div class="col-md-6">
+                        {{ form_row(form.latitude, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form_row(form.longitude, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary mt-3">Get Weather</button>
+            {{ form_end(form) }}
+        </div>
+    </div>
+
+    {% if weather_data %}
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h2 class="h5 mb-0">Data from Open Meteo</h2>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-info">
+                    <p class="mb-1"><strong>Location:</strong> Latitude: {{ weather_data.latitude }}, Longitude: {{ weather_data.longitude }}</p>
+                    <p class="mb-0"><strong>Timezone:</strong> {{ weather_data.timezone }}</p>
+                </div>
+
+                {% if weather_data.daily %}
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead class="table-primary">
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Max Temperature (°C)</th>
+                                    <th>Min Temperature (°C)</th>
+                                    <th>Precipitation (mm)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for i in 0..weather_data.daily.time|length - 1 %}
+                                <tr>
+                                    <td>{{ weather_data.daily.time[i] }}</td>
+                                    <td>{{ weather_data.daily.temperature_2m_max[i] }}</td>
+                                    <td>{{ weather_data.daily.temperature_2m_min[i] }}</td>
+                                    <td>{{ weather_data.daily.precipitation_sum[i] }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

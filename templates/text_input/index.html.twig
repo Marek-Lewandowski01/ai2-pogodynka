@@ -24,7 +24,7 @@
         <p>{{ submittedText|raw }}</p>
     {% endif %}
 
-    {{ form_start(form) }}
+    {{ form_start(form, {'attr': {'data-turbo': 'false'}}) }}
     {{ form_widget(form) }}
     <div class="d-flex gap-2 mt-3">
         <button type="submit" class="btn btn-primary">{{ 'Wyślij'|trans }}</button>

@@ -19,8 +19,12 @@ security:
             form_login:
                 login_path: app_login
                 check_path: app_login
+                enable_csrf: true
             logout:
                 path: app_logout
+
+            login_throttling:
+                max_attempts: 2
 
     role_hierarchy:
         ROLE_ADMIN:

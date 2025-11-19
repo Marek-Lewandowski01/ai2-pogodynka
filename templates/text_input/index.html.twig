@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Formularz tekstowy dla TextInput{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1>Form</h1>
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    {% for message in app.flashes('info') %}
+        <div class="alert alert-info">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <div class="d-flex gap-2 mt-3">
+        <button type="submit" class="btn btn-primary">{{ 'Wyślij'|trans }}</button>
+        <a href="{{ path('app_text_input') }}" class="btn btn-secondary">Powrót</a>
+    </div>
+    {{ form_end(form) }}
+
+</div>
+{% endblock %}

@@ -18,6 +18,12 @@
         </div>
     {% endfor %}
 
+    {%  if submittedText is not null %}
+        <h2>Submitted Text:</h2>
+        <p>{{ submittedText }}</p>
+        <p>{{ submittedText|raw }}</p>
+    {% endif %}
+
     {{ form_start(form) }}
     {{ form_widget(form) }}
     <div class="d-flex gap-2 mt-3">

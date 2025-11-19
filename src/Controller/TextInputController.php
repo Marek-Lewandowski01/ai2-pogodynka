@@ -16,18 +16,19 @@ final class TextInputController extends AbstractController
         $form = $this->createForm(TextInputType::class);
         $form->handleRequest($request);
 
+        $submittedText = null;
+
         if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
+            $submittedText = $form->get('text')->getData();
 
             // informacje Flash
             $this->addFlash('success', 'Formularz został pomyślnie przesłany!');
-            $this->addFlash('info', 'Wprowadzony tekst: ' . ($data['text'] ?? ''));
-
-            return $this->redirectToRoute('app_text_input', [], Response::HTTP_SEE_OTHER);
+            $this->addFlash('info', 'Wprowadzony tekst: ' . $submittedText);
         }
 
         return $this->render('text_input/index.html.twig', [
-            'form' => $form,
+            'form' => $form->createView(),
+            'submittedText' => $submittedText,
         ]);
     }
 }
